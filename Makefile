@@ -17,7 +17,8 @@ SRCS = so_long.c \
 	error.c \
 	so_long_utils.c \
 	list_utils.c \
-	game_init.c
+	game_init.c \
+	mlx_utils.c
 
 OBJ = $(SRCS:.c=.o)
 

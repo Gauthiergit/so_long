@@ -7,6 +7,13 @@
 # include <fcntl.h>
 # define BUFFER_SIZE 100
 
+// Structure to initialized the display with mlx
+typedef struct s_data
+{
+    void	*mlx;
+    void	*win;
+} 				t_data;
+
 // Structure for item position on map
 typedef struct s_place
 {
@@ -48,5 +55,10 @@ void	clear_game(t_game *game);
 void	clear_list(t_place **itemlist);
 void	add_place(t_place **itemlist, t_place *newitem);
 t_place	*newplace(int x, int y);
+
+/* Useful fonction to manage hooks and events
+- mlx_utils.c */
+int	close_window(t_data *data);
+int key_hook(int keycode, t_data *data);
 
 #endif
