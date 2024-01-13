@@ -26,7 +26,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-/*#include <stdio.h>
+/* #include <stdio.h>
 int main(void)
 {
 	int arr[5]; // Tableau d'entiers
@@ -48,4 +48,4 @@ int main(void)
 	printf("\n");
 
 	return 0;
-}*/
+} */

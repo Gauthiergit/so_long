@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/08 10:39:40 by gpeyre            #+#    #+#             */
+/*   Updated: 2024/01/13 11:36:59 by gpeyre           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_place(t_place **itemlist, t_game **game, char **map);
@@ -5,25 +17,20 @@ char	**extract_map(char *map);
 int		count_lines(char *map);
 t_place	*init_size(char **map);
 
-t_game	*game_init(char *param)
+void	game_init(t_game *game, char *param)
 {
-	t_game	*game;
-	t_place	*itemlist;
+	t_place	*chestlist;
 
-	itemlist = NULL;
-	game = (t_game *)malloc(sizeof(*game));
-	if (!game)
-		return (NULL);
-	game->map = extract_map(param); 
-	init_place(&itemlist, &game, game->map);
-	game->item = itemlist;
+	chestlist = NULL;
+	game->map = extract_map(param);
+	init_place(&chestlist, &game, game->map);
+	game->chest = chestlist;
 	game->size = init_size(game->map);
-	return (game);
 }
 
 char	**extract_map(char *map)
 {
-	char	 **extract;
+	char	**extract;
 	int		line_nb;
 	int		i;
 	int		fd;
@@ -37,7 +44,7 @@ char	**extract_map(char *map)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		extract[i] = ft_strdup(line);
 		free(line);
 		i++;
@@ -59,7 +66,7 @@ int	count_lines(char *map)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		line_nb++;
 		free(line);
 	}
@@ -71,7 +78,7 @@ void	init_place(t_place **itemlist, t_game **game, char **map)
 {
 	size_t	y;
 	size_t	x;
-	t_place *item;
+	t_place	*item;
 
 	y = 0;
 	item = NULL;
@@ -81,7 +88,7 @@ void	init_place(t_place **itemlist, t_game **game, char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
-				(*game)->perso = newplace(x, y);
+				(*game)->player = newplace(x, y);
 			else if (map[y][x] == 'E')
 				(*game)->exit = newplace(x, y);
 			else if (map[y][x] == 'C')
@@ -99,7 +106,7 @@ t_place	*init_size(char **map)
 {
 	size_t	y;
 	size_t	x;
-	t_place *size;
+	t_place	*size;
 
 	x = ft_strlen(*map) - 3;
 	y = count_line_tab(map) - 2;

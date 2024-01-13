@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 10:21:16 by gpeyre            #+#    #+#             */
+/*   Updated: 2024/01/13 11:40:18 by gpeyre           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+void	check_error_file(int argc, char **argv)
+{
+	char	*type_file;
+	int		fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (argc != 2)
+	{
+		ft_printf("Error\nNo map in parameter\n");
+		exit(1);
+	}
+	type_file = ft_strrchr(argv[1], '.');
+	if (ft_strncmp(type_file, ".ber", 4) != 0)
+	{
+		ft_printf("Error\nThe parameter isn't of type .ber\n");
+		exit(1);
+	}
+	if (fd == -1)
+	{
+		ft_printf("Error\nFile not found or empty\n");
+		exit(1);
+	}
+	close(fd);
+}

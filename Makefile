@@ -1,5 +1,9 @@
 NAME = so_long
 
+DIR_OBJ = obj/
+
+DIR_SRC = src/
+
 LIBFT = libft/libft.a
 
 PRINTF = printf/libftprintf.a
@@ -8,19 +12,13 @@ LIBMLX = minilibx-linux/libmlx.a
 
 CC = cc 
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 RM = rm -f
 
-SRCS = so_long.c \
-	get_next_line.c \
-	error.c \
-	so_long_utils.c \
-	list_utils.c \
-	game_init.c \
-	mlx_utils.c
+SRCS = $(wildcard $(DIR_SRC)*.c)
 
-OBJ = $(SRCS:.c=.o)
+OBJ = $(patsubst $(DIR_SRC)%.c,$(DIR_OBJ)%.o,$(SRCS))
 
 $(NAME): $(OBJ)
 		make -C ./printf
@@ -28,13 +26,19 @@ $(NAME): $(OBJ)
 		make -C ./minilibx-linux
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(PRINTF) $(LIBMLX) -lXext -lX11
 
+$(DIR_OBJ):
+	@mkdir -p $(DIR_OBJ)
+
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c | $(DIR_OBJ)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 clean:
 		make clean -C libft
 		make clean -C printf
 		make clean -C minilibx-linux
-		$(RM) $(OBJ)
+		rm -rf $(DIR_OBJ)
 
 fclean: clean
 		$(RM) $(NAME)

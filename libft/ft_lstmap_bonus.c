@@ -6,7 +6,7 @@
 /*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:20:15 by gpeyre            #+#    #+#             */
-/*   Updated: 2023/10/13 17:57:12 by gpeyre           ###   ########.fr       */
+/*   Updated: 2024/01/05 17:54:56 by gpeyre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int main()
 	i = 1;
 	while (current->next != NULL)
 	{
-		printf("Contenue %d modifie avec 'g': %s\n", i, (char *)current->content);
+		printf("Contenue %d modifie avec 'g': %s\n", i,
+			(char *)current->content);
 		current = current->next;
 		i++;
 	}
