@@ -6,7 +6,7 @@
 /*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:48:31 by gpeyre            #+#    #+#             */
-/*   Updated: 2024/01/13 11:32:21 by gpeyre           ###   ########.fr       */
+/*   Updated: 2024/01/15 09:42:22 by gpeyre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,11 @@ typedef struct s_data
 }				t_data;
 
 /* Fonction to check errors
-- error.c */
+- error.c
+- error_2.c */
 int		check_error_map(char **argv, t_game *game);
 void	check_error_file(int argc, char **argv);
+int		is_valid_cara(char **map);
 
 /* Fonctions to help initialisate the map
 - get_next_line.c

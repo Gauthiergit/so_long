@@ -6,13 +6,13 @@
 /*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:39:40 by gpeyre            #+#    #+#             */
-/*   Updated: 2024/01/13 11:36:59 by gpeyre           ###   ########.fr       */
+/*   Updated: 2024/01/16 09:10:02 by gpeyre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_place(t_place **itemlist, t_game **game, char **map);
+void	init_place(t_place **itemlist, t_game *game, char **map);
 char	**extract_map(char *map);
 int		count_lines(char *map);
 t_place	*init_size(char **map);
@@ -22,8 +22,10 @@ void	game_init(t_game *game, char *param)
 	t_place	*chestlist;
 
 	chestlist = NULL;
+	game->player = NULL;
+	game->exit = NULL;
 	game->map = extract_map(param);
-	init_place(&chestlist, &game, game->map);
+	init_place(&chestlist, game, game->map);
 	game->chest = chestlist;
 	game->size = init_size(game->map);
 }
@@ -74,7 +76,7 @@ int	count_lines(char *map)
 	return (line_nb);
 }
 
-void	init_place(t_place **itemlist, t_game **game, char **map)
+void	init_place(t_place **itemlist, t_game *game, char **map)
 {
 	size_t	y;
 	size_t	x;
@@ -87,10 +89,10 @@ void	init_place(t_place **itemlist, t_game **game, char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'P')
-				(*game)->player = newplace(x, y);
-			else if (map[y][x] == 'E')
-				(*game)->exit = newplace(x, y);
+			if (map[y][x] == 'P' && !game->player)
+				game->player = newplace(x, y);
+			else if (map[y][x] == 'E' && !game->exit)
+				game->exit = newplace(x, y);
 			else if (map[y][x] == 'C')
 			{
 				item = newplace(x, y);

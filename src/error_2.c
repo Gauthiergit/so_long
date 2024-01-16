@@ -6,7 +6,7 @@
 /*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 10:21:16 by gpeyre            #+#    #+#             */
-/*   Updated: 2024/01/13 11:40:18 by gpeyre           ###   ########.fr       */
+/*   Updated: 2024/01/15 15:39:17 by gpeyre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,24 @@ void	check_error_file(int argc, char **argv)
 		exit(1);
 	}
 	close(fd);
+}
+
+int	is_valid_cara(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (!ft_strchr("01PCWE", map[i][j]))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

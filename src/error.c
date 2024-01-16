@@ -6,7 +6,7 @@
 /*   By: gpeyre <gpeyre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:37:33 by gpeyre            #+#    #+#             */
-/*   Updated: 2024/01/13 12:08:33 by gpeyre           ###   ########.fr       */
+/*   Updated: 2024/01/15 09:49:22 by gpeyre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		check_valid_path(char *map, t_game *game);
 
 int	check_error_map(char **argv, t_game *game)
 {
+	if (is_valid_cara(game->map))
+		return (ft_printf("Error\nCaractere allowed are '10PCEW'\n"), 1);
 	if (check_walls(game->map))
 		return (ft_printf("Error\nThe map isn't closed\n"), 1);
 	if (is_rectangle(game->map))
