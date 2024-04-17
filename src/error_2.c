@@ -24,7 +24,7 @@ void	check_error_file(int argc, char **argv)
 		exit(1);
 	}
 	type_file = ft_strrchr(argv[1], '.');
-	if (ft_strncmp(type_file, ".ber", 4) != 0)
+	if (!type_file || ft_strncmp(type_file, ".ber", 4) != 0)
 	{
 		ft_printf("Error\nThe parameter isn't of type .ber\n");
 		exit(1);
